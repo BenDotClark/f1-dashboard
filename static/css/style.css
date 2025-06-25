@@ -1,0 +1,215 @@
+/* --------------- Global Reset --------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    background: #242424;
+    color: #ffffff;
+}
+
+/* --------------- Header --------------- */
+header {
+    background: #FF1E00;
+    color: #ffffff;
+    padding: 16px 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 1.5rem;
+}
+
+/* --------------- Utility --------------- */
+.hidden {
+    display: none;
+}
+
+/** --------------- Loading overlay --------------- */
+#loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#loading-indicator .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 0.5em;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/*--------------- Error Banner ---------------*/
+#error-message {
+    background: #c0392b;
+    color: #fff;
+    padding: 12px 24px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* --------------- Controls (Desktop) --------------- */
+.controls {
+    display: flex;
+    gap: 16px;
+    padding: 12px 24px;
+    background: #242424;
+    color: #ffffff;
+    border-bottom: 1px solid #FF1E00;
+    align-items: center;
+}
+
+.controls select {
+    padding: 8px 12px;
+    border: 1px solid #FF1E00;
+    border-radius: 4px;
+    background: #242424;
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+/* --------------- Accordion (Mobile) --------------- */
+.accordion {
+    display: none;
+    cursor: pointer;
+    padding: 12px 24px;
+    background: #FF1E00;
+    border-bottom: 1px solid #FF1E00;
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.accordion::after {
+    content: '▾';
+    float: right;
+    transition: transform 0.2s;
+}
+
+.accordion.active::after {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    display: none;
+    padding: 0 24px 12px;
+    background: #FF1E00;
+    border-bottom: 1px solid #FF1E00;
+}
+
+.accordion-content select {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* --------------- Main & Table --------------- */
+main {
+    padding: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #242424;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    /* ensure corners clip rows */
+}
+
+tr.team-row td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+tr.team-row td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #2a2a2a;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Alternating row colors */
+tr:nth-child(odd) {
+    background: #242424;
+}
+
+tr:nth-child(even) {
+    background: #2a2a2a;
+}
+
+tr:hover {
+    background: #1f1f1f;
+}
+
+/* --------------- Team Bar Accent --------------- */
+.team-bar {
+    display: inline-block;
+    vertical-align: middle;
+    width: 4px;
+    /* thickness */
+    height: 1em;
+    /* matches line-height of the name */
+    margin-right: 0.5em;
+    border-radius: 2px;
+    background-color: var(--team-color);
+}
+
+/* --------------- Mobile Responsiveness --------------- */
+@media (max-width: 600px) {
+    .controls {
+        display: none;
+    }
+
+    .accordion {
+        display: block;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    th,
+    td {
+        white-space: nowrap;
+    }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Race Results MVP</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>F1 Race Results MVP</h1>
+    </header>
+
+    <!-- Loading overlay -->
+    <div id="loading-indicator" class="hidden">
+        <div class="spinner"></div>
+        <div>Loading…</div>
+    </div>
+
+    <!-- Inline error banner (above controls) -->
+    <div id="error-message" role="alert" aria-live="assertive" class="hidden"></div>
+
+    <!-- Desktop Controls -->
+    <div class="controls">
+        <select id="year-select">
+            <!-- JS will populate -->
+        </select>
+        <select id="race-select">
+            <!-- JS will populate -->
+        </select>
+        <select id="session-select">
+            <option value="FP1">FP1</option>
+            <option value="FP2">FP2</option>
+            <option value="FP3">FP3</option>
+            <option value="Q">Qualifying</option>
+            <option value="R" selected>Race</option>
+        </select>
+    </div>
+
+    <!-- Mobile Accordion Controls -->
+    <button class="accordion">Filters</button>
+    <div class="accordion-content">
+        <select id="year-select-mobile"></select>
+        <select id="race-select-mobile"></select>
+        <select id="session-select-mobile">
+            <option value="FP1">FP1</option>
+            <option value="FP2">FP2</option>
+            <option value="FP3">FP3</option>
+            <option value="Q">Qualifying</option>
+            <option value="R" selected>Race</option>
+        </select>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content" aria-busy="false">
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Driver</th>
+                    <th>Time / Gap</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JS will inject <tr> rows here -->
+            </tbody>
+        </table>
+    </main>
+
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>
