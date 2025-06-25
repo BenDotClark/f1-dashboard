@@ -50,7 +50,7 @@ def api_season_results(year, rnd):
     session_name = request.args.get('session', 'R').upper()
     # Load race session
     session = fastf1.get_session(year, rnd, session_name)
-    session.load(telemetry=False, weather=False, status=False, laps=False) # fetch data / cache
+    session.load(telemetry=False, weather=False) # fetch data / cache
 
     df = session.results # pandas DataFrame
 
