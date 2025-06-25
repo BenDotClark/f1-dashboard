@@ -1,0 +1,18 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+
+# Ignore virtual environments
+.venv/
+venv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# FastF1 cache
+ff1_cache/
+
+# IDE / Editor folders
+.vscode/
+
+# Env files
+.env
