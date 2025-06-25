@@ -5,9 +5,14 @@ import os
 import fastf1
 import pandas as pd
 
-# Enable FastF1 caache to speed up repeated calls
-dir_cache = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'ff1_cache')
-fastf1.Cache.enable_cache(dir_cache)
+# 1) Read cache dir from env, fallback to local 'ff1_cache'
+cache_dir = os.environ.get('FASTF1_CACHE_DIR',
+                           os.path.join(os.path.abspath(os.path.dirname(__file__)), 'ff1_cache'))
+# 2) Ensure it exists
+os.makedirs(cache_dir, exist_ok=True)
+
+# 3) Enable FastF1 cache
+fastf1.Cache.enable_cache(cache_dir)
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
