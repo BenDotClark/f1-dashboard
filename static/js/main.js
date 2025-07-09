@@ -62,7 +62,7 @@ async function safeFetch(url, opts) {
   }
 }
 
-// 3. Populate Year & Race dropdowns
+// 3. Populate Year & Race dropdowns (desktop + mobile)
 async function initControls(season) {
   yearSelect.innerHTML = '';
   raceSelect.innerHTML = '';
@@ -74,6 +74,7 @@ async function initControls(season) {
   races.forEach(r => {
     raceSelect.append(new Option(`${r.round} – ${r.raceName}`, r.round));
   });
+
   sessionSelect.value = 'R';
 }
 

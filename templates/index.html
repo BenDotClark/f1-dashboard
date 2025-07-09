@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>F1 Race Results MVP</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
@@ -24,7 +24,7 @@
     <div id="error-message" role="alert" aria-live="assertive" class="hidden"></div>
 
     <!-- Desktop Controls -->
-    <div class="controls">
+    <div class="filters">
         <select id="year-select">
             <!-- JS will populate -->
         </select>
@@ -40,28 +40,20 @@
         </select>
     </div>
 
-    <!-- Mobile Accordion Controls -->
-    <button class="accordion">Filters</button>
-    <div class="accordion-content">
-        <select id="year-select-mobile"></select>
-        <select id="race-select-mobile"></select>
-        <select id="session-select-mobile">
-            <option value="FP1">FP1</option>
-            <option value="FP2">FP2</option>
-            <option value="FP3">FP3</option>
-            <option value="Q">Qualifying</option>
-            <option value="R" selected>Race</option>
-        </select>
-    </div>
-
     <!-- Main Content -->
     <main id="main-content" aria-busy="false">
         <table id="results-table">
             <thead>
                 <tr>
-                    <th>Position</th>
+                    <th>
+                        <span class="desktop-header">Position</span>
+                        <span class="mobile-header">Pos</span>
+                    </th>
                     <th>Driver</th>
-                    <th>Time / Gap</th>
+                    <th>
+                        <span class="desktop-header">Time / Gap</span>
+                        <span class="mobile-header">Time</span>
+                    </th>
                 </tr>
             </thead>
             <tbody>

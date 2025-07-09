@@ -75,18 +75,17 @@ header h1 {
     font-weight: bold;
 }
 
-/* --------------- Controls (Desktop) --------------- */
-.controls {
+/* --------------- Controls --------------- */
+.filters {
     display: flex;
     gap: 16px;
     padding: 12px 24px;
     background: #242424;
-    color: #ffffff;
     border-bottom: 1px solid #FF1E00;
     align-items: center;
 }
 
-.controls select {
+.filters select {
     padding: 8px 12px;
     border: 1px solid #FF1E00;
     border-radius: 4px;
@@ -95,43 +94,13 @@ header h1 {
     font-size: 0.9rem;
 }
 
-/* --------------- Accordion (Mobile) --------------- */
-.accordion {
-    display: none;
-    cursor: pointer;
-    padding: 12px 24px;
-    background: #FF1E00;
-    border-bottom: 1px solid #FF1E00;
-    width: 100%;
-    text-align: left;
-    font-size: 1rem;
-}
-
-.accordion::after {
-    content: '▾';
-    float: right;
-    transition: transform 0.2s;
-}
-
-.accordion.active::after {
-    transform: rotate(180deg);
-}
-
-.accordion-content {
-    display: none;
-    padding: 0 24px 12px;
-    background: #FF1E00;
-    border-bottom: 1px solid #FF1E00;
-}
-
-.accordion-content select {
-    width: 100%;
-    margin-bottom: 8px;
-}
-
 /* --------------- Main & Table --------------- */
 main {
     padding: 24px;
+}
+
+.mobile-header {
+    display: none;
 }
 
 table {
@@ -194,13 +163,21 @@ tr:hover {
 }
 
 /* --------------- Mobile Responsiveness --------------- */
+
+/* Mobile: stack selects full-width */
 @media (max-width: 600px) {
-    .controls {
-        display: none;
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+        /* make children full-width */
+        gap: 0.5rem;
+        padding: 12px;
     }
 
-    .accordion {
-        display: block;
+    .filters select {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.75rem;
     }
 
     table {
@@ -208,8 +185,27 @@ tr:hover {
         overflow-x: auto;
     }
 
-    th,
-    td {
+    /* Increase touch targets & legibility */
+    body {
+        font-size: 1.1rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+        padding: 1rem 0.5rem;
+    }
+
+    .desktop-header {
+        display: none;
+    }
+
+    .mobile-header {
+        display: inline;
+    }
+
+    #results-table th,
+    #results-table td {
+        padding: 0.75rem 0.5rem;
         white-space: nowrap;
     }
 }
