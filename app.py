@@ -73,13 +73,16 @@ def api_season_results(year, rnd):
 
         # Now pull the correct team name
         team_name = getattr(row, 'TeamName', '')
+        # Pull status (e.g. "Finished", "DNF", "DNS", "DSQ", etc.)
+        status_str = getattr(row, 'Status', '') or ''
 
         results.append({
             'position': int(getattr(row, 'Position', 0)),
             'driver': getattr(row, 'Abbreviation', getattr(row, 'Driver', '')),
             'constructor': team_name,
             'time':        time_str,
-            'gap':         gap_str
+            'gap':         gap_str,
+            'status':      status_str
         })
     return jsonify({
         'season': year,

@@ -22,6 +22,15 @@ const teamColors = {
   'Haas':          '#9C9FA2'
 };
 
+// Mapping of race result status
+const statusMap = {
+  'Finished':   '',       // will fall back to time/gap
+  'Lapped':     'LAP',
+  'Retired':    'DNF',
+  'Did not start': 'DNS',
+  'Disqualified':  'DSQ'
+};
+
 // 2. Utility functions
 function showLoading() {
   errorEl.classList.add('hidden');
@@ -113,9 +122,17 @@ function renderTable(results) {
 
     // Time / Gap cell
     const tdTime = document.createElement('td');
-    let txt = res.time || res.gap || '';
-    tdTime.textContent = txt;
-    tr.appendChild(tdTime);
+    const code = statusMap[res.status] ?? res.status.toUpperCase().slice(0,3);
+    if (code) {
+      tdTime.textContent = code;
+      tdTime.classList.add('status-cell', `status-${code.toLowerCase()}`);
+      tdTime.setAttribute('aria-label', {
+        'LAP':'Lapped','DNF':'Did Not Finish',
+        'DNS':'Did Not Start','DSQ':'Disqualified'}[code] || code);
+      } else {
+        tdTime.textContent = res.time || res.gap || '';
+      }
+      tr.appendChild(tdTime);
 
     tableBody.appendChild(tr);
   });
@@ -156,6 +173,24 @@ async function loadLatest() {
 
 // 7. Wire up events
 window.addEventListener('DOMContentLoaded', () => {
+  //
+  // Theme toggle logic
+  //
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  if (themeToggleBtn) {
+    const storedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    themeToggleBtn.textContent = storedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggleBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next    = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeToggleBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  }
+
   loadLatest();
   yearSelect   .addEventListener('change', loadLatest);
   raceSelect   .addEventListener('change', fetchAndRenderResults);

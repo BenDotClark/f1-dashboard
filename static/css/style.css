@@ -1,3 +1,63 @@
+@font-face {
+    font-family: 'Formula1 Display';
+    src: url('../fonts/Formula1-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Formula1 Display';
+    src: url('../fonts/Formula1-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* ----------------------------------
+   0) Theme variables
+----------------------------------*/
+
+/* Light theme (default) */
+:root {
+    /* typography */
+    --font-primary: 'Formula1 Display', Arial, sans-serif;
+
+    /* core colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f0f0f0;
+    --bg-accent: #FF1E00;
+
+    --text-primary: #242424;
+    --text-secondary: #444444;
+    --text-on-accent: #ffffff;
+
+    /* table */
+    --table-bg: #ffffff;
+    --table-head-bg: #dddddd;
+    --row-odd-bg: #f9f9f9;
+    --row-even-bg: #e9e9e9;
+    --row-hover-bg: #f0f0f0;
+}
+
+/* Dark theme overrides */
+[data-theme="dark"] {
+    --bg-primary: #242424;
+    --bg-secondary: #2a2a2a;
+    --bg-accent: #FF1E00;
+
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-on-accent: #ffffff;
+
+    --table-bg: #242424;
+    --table-head-bg: #2a2a2a;
+    --row-odd-bg: #242424;
+    --row-even-bg: #2a2a2a;
+    --row-hover-bg: #1f1f1f;
+}
+
 /* --------------- Global Reset --------------- */
 * {
     box-sizing: border-box;
@@ -6,22 +66,44 @@
 }
 
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-primary);
     line-height: 1.6;
-    background: #242424;
-    color: #ffffff;
+    background: var(--bg-primary);
+    color: var(--text-primary);
 }
 
 /* --------------- Header --------------- */
 header {
-    background: #FF1E00;
-    color: #ffffff;
-    padding: 16px 24px;
+    background: var(--bg-accent);
+    color: var(--text-on-accent);
+    padding: 20px 32px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    gap: 12px;
+    display: flex;
+}
+
+.site-logo img {
+    display: block;
 }
 
 header h1 {
     font-size: 1.5rem;
+}
+
+/* Style the button */
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: var(--text-on-accent);
+    padding: 4px;
+    transition: transform 0.2s;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1);
 }
 
 /* --------------- Utility --------------- */
@@ -80,23 +162,44 @@ header h1 {
     display: flex;
     gap: 16px;
     padding: 12px 24px;
-    background: #242424;
-    border-bottom: 1px solid #FF1E00;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--bg-accent);
     align-items: center;
 }
 
 .filters select {
     padding: 8px 12px;
-    border: 1px solid #FF1E00;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--bg-accent);
     border-radius: 4px;
-    background: #242424;
-    color: #ffffff;
     font-size: 0.9rem;
 }
 
 /* --------------- Main & Table --------------- */
 main {
     padding: 24px;
+}
+
+header h1,
+#results-table th {
+    font-weight: bold;
+    /* ensure you’ve imported the Bold face */
+}
+
+/* Make header + filters stick at the top */
+header,
+.filters {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    /* above the table */
+}
+
+/* Ensure the filters sit directly beneath the header */
+.filters {
+    top: 64px;
+    /* height of your header in px */
 }
 
 .mobile-header {
@@ -106,8 +209,8 @@ main {
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #242424;
-    color: #ffffff;
+    background: var(--table-bg);
+    color: var(--text-primary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
     overflow: hidden;
@@ -131,22 +234,28 @@ td {
 }
 
 th {
-    background: #2a2a2a;
-    color: #ffffff;
+    background: var(--table-head-bg);
+    color: var(--text-primary);
     font-weight: 600;
+}
+
+/* center the Time/Status header and its cells */
+#results-table th:nth-child(3),
+#results-table td:nth-child(3) {
+    text-align: center;
 }
 
 /* Alternating row colors */
 tr:nth-child(odd) {
-    background: #242424;
+    background: var(--row-odd-bg);
 }
 
 tr:nth-child(even) {
-    background: #2a2a2a;
+    background: var(--row-even-bg);
 }
 
 tr:hover {
-    background: #1f1f1f;
+    background: var(--row-hover-bg);
 }
 
 /* --------------- Team Bar Accent --------------- */
@@ -161,6 +270,7 @@ tr:hover {
     border-radius: 2px;
     background-color: var(--team-color);
 }
+
 
 /* --------------- Mobile Responsiveness --------------- */
 
